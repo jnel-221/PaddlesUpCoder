@@ -1,0 +1,14 @@
+[
+    {
+        "title": "What the heck is a handlebar?",
+        "text": "Not that I know much myself yet, but so far I think it's just a way to dynamically produce HTML content and inject data from your database into it."
+    },
+    {
+        "title": "Race-day Prep",
+        "text": "The day before the races, drink plenty of water and get some rest.  Your team will thank you for it!  Make sure you have your paddle, life-jacket, chair, snacks, weather-gear, and something to do between heats."
+    },
+    {
+        "title": "2021 race season likely cancelled",
+        "text": "With a lot of festivals cancelled due to the pandemic, now is a great time to brush-up on your javascript array methods!"
+    }
+]
