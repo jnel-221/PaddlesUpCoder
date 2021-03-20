@@ -1,12 +1,12 @@
 [{
-    "name": "PortPower",
+    "user_name": "PortPower",
     "password": "password234"
 },
 {
-    "name": "node4good",
+    "user_name": "node4good",
     "password": "password234"
 },
 {
-    "name": "jenBob",
+    "user_name": "jenBob",
     "password": "password234"
 }]
