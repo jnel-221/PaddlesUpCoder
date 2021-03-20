@@ -1,1 +1,39 @@
 /* add styles for components here */
+
+/* Color pallet */
+/* {"Imperial Red":"e63946","Honeydew":"f1faee","Powder Blue":"a8dadc","Celadon Blue":"457b9d","Prussian Blue":"1d3557"} */
+/* Styles across all pages */
+body{
+    background-color: #f1faee;
+}
+
+h1{
+    background-color: #f1faee ;
+    color: #1d3557;
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px #457b9d;
+    display: inline-block;
+}
+
+img{
+   
+    color: #e63946;
+    display:inline-block;
+}
+
+.nav{
+    padding-bottom: 25px;
+}
+.nav-link{
+    color: #f1faee;
+}
+
+.nav-link:hover{
+    color: #a8dadc;
+}
+.jumbotron {
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background-color: #1d3557;
+    border-radius: .3rem;  
+  }
