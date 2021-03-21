@@ -37,3 +37,32 @@ img{
     background-color: #1d3557;
     border-radius: .3rem;  
   }
+
+  /* Card Stylings */
+  .card{
+      width: 90%;
+      border: 2px solid #1d3557; 
+  }
+
+  .card-header{
+      background-color: #1d3557;
+      color: #f1faee;
+      height: 50px;
+  }
+   .author{
+       float:right;
+   }
+
+  .card-body {
+      background-color: #f1faee;
+      color: #1d3557;
+  }
+
+  a{
+      text-decoration: none;  
+  }
+
+  /* Non-Form Button Stylings */
+  .post-btn {
+      width:90%;
+  }
