@@ -2,6 +2,7 @@
 
 /* Color pallet */
 /* {"Imperial Red":"e63946","Honeydew":"f1faee","Powder Blue":"a8dadc","Celadon Blue":"457b9d","Prussian Blue":"1d3557"} */
+
 /* Styles across all pages */
 body{
     background-color: #f1faee;
@@ -65,4 +66,10 @@ img{
   /* Non-Form Button Stylings */
   .post-btn {
       width:90%;
+  }
+
+
+  /* invisibility class */
+  .hidden {
+      display: none;
   }
