@@ -1,20 +1,19 @@
 const router = require("express").Router();
-const { User } = require("../models");
+const { User, Post } = require("../models");
 const withAuth = require("../utils/auth");
 
-// TODO: after building models and pseudo-coding app, complete get-route for app.
-//prevents us from accessing the homepage if not logged in, by means of our middle-ware traffic cop!
-router.get("/", withAuth, async (req, res) => {
+//access homepage only prior to logging in / signing up
+router.get("/", async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ["password"] },
-      order: [["name", "ASC"]],
+    const userPostData = await Post.findAll({
+      include: [{ model: User }],
     });
+    
+    const userPosts = userPostData.map((post) => post.get({ plain: true }));
 
-    const users = userData.map((post) => post.get({ plain: true }));
-
+    console.log(userPosts);
     res.render("homepage", {
-      users,
+      userPosts,
       //passes in logged_in status
       logged_in: req.session.logged_in,
     });
