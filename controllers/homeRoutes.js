@@ -22,10 +22,29 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/dashboard", withAuth, async (req, res) =>{
+  try {
+    const userPostData = await User.findAll({
+      include: [{ model: Post }],
+    });
+    
+    const userPosts = userPostData.map((post) => post.get({ plain: true }));
+
+    console.log(userPosts);
+    res.render("homepage", {
+      userPosts,
+      //passes in logged_in status
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
 router.get("/login", (req, res) => {
-  //if session exists, goes to homepage, otherwise it renders login handlebar.
+  //if session exists, goes to dashboard, otherwise it renders homepage.
   if (req.session.logged_in) {
-    res.redirect("/");
+    res.redirect("/dashboard");
     return;
   }
 
