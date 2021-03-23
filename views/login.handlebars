@@ -16,37 +16,13 @@
             <div class="d-grid gap-2 mb-2">
                 <button type="button" class="btn btn-secondary">Login!</button>
             </div>
-            <a id="sign-up-link" href="/" onclick="changeView()">Sign up instead</a>
+            <a id="sign-up-link" href="/signup" onclick="changeView()">Sign up instead</a>
         </form>
     </div>
 </div>
 </div>
 {{!-- end login view --}}
 
-{{!-- sign-up view --}}
-<div class="card mx-auto mb-4 hidden" id="sign-in-view">
-    <div class="card-header">
-        <h3>Sign up</h3>
-    </div>
-    <div class="card-body">
-        <form>
-            <div class="mb-3">
-                <label for="userName" class="form-label">User Name</label>
-                <input type="text" class="form-control" id="new-user-name">
-            </div>
-            <div class="mb-3">
-                <label for="InputPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="new-user-password">
-            </div>
-            <div class="d-grid gap-2 mb-2">
-                <button type="button" class="btn btn-secondary">Sign up!</button>
-            </div>
-            <a href="/" onclick="changeView()">Login instead</a>
-        </form>
-    </div>
-</div>
-</div>
 
-{{!-- end sign-up view --}}
 
 <script src="/public/js/login.js"></script>
