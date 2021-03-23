@@ -1,11 +1,11 @@
 //add login function here
 const loginFormHandler = async (event) => {
   event.preventDefault();
-
+  console.log("you made it to the login function!");
   // Collect values from the login form
   const userName = document.querySelector("#user-name").value.trim();
   const password = document.querySelector("#password-login").value.trim();
-
+    console.log(userName, password);
   if (userName && password) {
     // Send a POST request to the API endpoint
     const response = await fetch("/api/users/login", {
@@ -25,6 +25,8 @@ const loginFormHandler = async (event) => {
 
 const signupFormHandler = async (event) => {
   event.preventDefault();
+
+  console.log("you made it to the signup function!");
 
   const name = document.querySelector("#new-user-name").value.trim();
   const password = document.querySelector("#new-user-password").value.trim();
@@ -51,20 +53,3 @@ document
 document
   .querySelector(".signup-form")
   .addEventListener("submit", signupFormHandler);
-
-const changeView = () => {
-  console.log("you clicked a link!");
-};
-// let test = document.getElementById("#sign-up-link");
-
-// test.addEventListener("click", function (e) {
-//   e.preventDefault();
-//   console.log("made it to sign-up", e.target);
-
-// });
-
-// document.getElementById("#login-link").addEventListener("click", function (e) {
-//   e.preventDefault();
-//   console.log("made it", e.target);
-
-// });
