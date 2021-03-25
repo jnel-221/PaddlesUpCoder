@@ -23,23 +23,33 @@ router.get("/", async (req, res) => {
 
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
-    const userPostData = await Post.findAll({
-      include: [{ model: User }],
-    });
-    console.log("@@made it to userPostData##", userPostData);
-    const userPosts = userPostData.map((post) => post.get({ plain: true }));
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
 
-    console.log(
-      "@@you've made it to userPosts in dashboard get route@@",
-      userPosts
-    );
+      include: [{ model: Post }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    console.log("@@made it to user @@", user);
+
+    const posts = user.posts;
+    //grab only posts that logged-in user wrote to render on dashboard otherwise display empty page with button at bottom
     res.render("dashboard", {
-      userPosts,
+      posts,
       //passes in logged_in status
       logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+router.get("/newpost", withAuth, async (req, res) => {
+  if (req.session.logged_in) {
+    res.render("newpost");
+  } else {
+    res.render("login");
   }
 });
 

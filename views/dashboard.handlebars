@@ -1,10 +1,11 @@
 {{!-- render individual user posts and "New Post" button after user logs in --}}
-{{#each userPosts}}
+{{#each posts}}
 {{>post_details}}
 {{/each}}
 
 <div class="position-relative">
-    <button type="button" class="btn btn-dark btn-newpost position-absolute top-100 start-50 translate-middle">
-        <h2>+ New Post</h2>
-    </button>
+    <a href="/newpost"><button type="button"
+            class="btn btn-dark btn-newpost position-absolute top-100 start-50 translate-middle">
+            <h2>+ New Post</h2>
+        </button></a>
 </div>
