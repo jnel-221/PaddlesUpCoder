@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Post } = require("../../models");
 
 //create new user from sign-up view
 router.post("/signup", async (req, res) => {
@@ -20,13 +20,14 @@ router.post("/signup", async (req, res) => {
 
 //login existing users from login page
 router.post("/login", async (req, res) => {
-  console.log("INCOMING-request body for login", req.body);
+
   try {
     //find user where username matches a username in DB
     const userData = await User.findOne({
       where: { user_name: req.body.userName },
+      include: {model: Post}
     });
-    console.log("@@@found user login route@@@", userData);
+   
     if (!userData) {
       res
         .status(400)
@@ -52,7 +53,7 @@ router.post("/login", async (req, res) => {
       res.json({ user: userData, message: "You are now logged in!" });
     });
   } catch (err) {
-    console.log("@@@findone user threw this@@@", err);
+
     res.status(400).json(err);
   }
 });

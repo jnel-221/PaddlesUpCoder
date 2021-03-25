@@ -11,7 +11,6 @@ router.get("/", async (req, res) => {
 
     const userPosts = userPostData.map((post) => post.get({ plain: true }));
 
-    console.log(userPosts);
     res.render("homepage", {
       userPosts,
       //passes in logged_in status
@@ -24,14 +23,17 @@ router.get("/", async (req, res) => {
 
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
-    const userPostData = await User.findAll({
-      include: [{ model: Post }],
+    const userPostData = await Post.findAll({
+      include: [{ model: User }],
     });
-
+    console.log("@@made it to userPostData##", userPostData);
     const userPosts = userPostData.map((post) => post.get({ plain: true }));
 
-    console.log(userPosts);
-    res.render("homepage", {
+    console.log(
+      "@@you've made it to userPosts in dashboard get route@@",
+      userPosts
+    );
+    res.render("dashboard", {
       userPosts,
       //passes in logged_in status
       logged_in: req.session.logged_in,
