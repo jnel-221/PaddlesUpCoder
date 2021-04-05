@@ -31,8 +31,6 @@ router.get("/dashboard", withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
-    console.log("@@made it to user @@", user);
-
     const posts = user.posts;
     //grab only posts that logged-in user wrote to render on dashboard otherwise display empty page with button at bottom
     res.render("dashboard", {
