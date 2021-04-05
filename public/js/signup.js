@@ -4,8 +4,6 @@ const signupFormHandler = async (event) => {
   
     const user_name = document.querySelector("#new-user-name").value.trim();
     const password = document.querySelector("#new-user-password").value.trim();
-
-    console.log("you're in signup js: ", user_name,password);
   
     if (user_name && password) {
       const response = await fetch("/api/users/signup", {

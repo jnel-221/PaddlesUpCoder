@@ -17,10 +17,10 @@
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="/">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/views/login.handlebars">Dashboard</a>
-            </li>
             {{#if logged_in}}
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+            </li>           
             <li class="nav-item">
                 <a class="nav-link" id="logout" href="/">Logout</a>
             </li>
