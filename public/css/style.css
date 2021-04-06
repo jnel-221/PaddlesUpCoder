@@ -68,6 +68,18 @@ img{
       width:90%;
   }
 
+  .btn-newpost{
+      margin-top: 15px;
+      background-color: #1d3557;
+      color: #f1faee;
+  }
+
+  .btn-newpost:hover{
+      background-color: #e63946;
+      color: #f1faee;
+  }
+  
+
 
   /* invisibility class */
   .hidden {
