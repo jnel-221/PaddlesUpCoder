@@ -7,17 +7,17 @@
                 <form>
                     <div class="mb-3">
                       <label for="title" class="form-label">Title</label>
-                      <input type="text" class="form-control" id="title">{{title}}
+                      <input type="text" class="form-control" id="title" value={{post.title}}>
                     </div>
                     <div class="mb-3">
                       <label for="content" class="form-label">Content</label>
-                      <textarea class="form-control" id="content" rows="3">{{text}}</textarea>
+                      <textarea class="form-control" id="content" rows="3">{{post.text}}</textarea>
                     </div>
                     <div class="d-grid gap-2 mb-2">
-                    <button type="button" class="btn btn-secondary" id="btn-update">Update Post</button>
+                    <button type="button" class="btn btn-secondary" id="btn-update" data-update={{post.id}}>Update Post</button>
                     </div> 
                     <div class="d-grid gap-2 mb-2">
-                        <button type="button" class="btn btn-secondary" id="btn-delete">Delete</button>
+                        <button type="button" class="btn btn-secondary" id="btn-delete" data-delete={{post.id}}>Delete</button>
                         </div>  
                   </form>
                 </div>

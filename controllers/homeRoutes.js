@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const path = require("path");
 const { User, Post } = require("../models");
 const withAuth = require("../utils/auth");
 
@@ -48,6 +49,23 @@ router.get("/newpost", withAuth, async (req, res) => {
     res.render("newpost");
   } else {
     res.render("login");
+  }
+});
+
+router.get("/updatepost/:id", withAuth, async (req, res) => {
+  console.log("@in homeRoutes now", req.params.id);
+  try {
+    const postData = await Post.findByPk(req.params.id);
+  
+    const post = postData.get({ plain: true });
+
+    console.log("@@cleaned up data from single post", post);
+    res.render("updatepost", {
+      post,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 

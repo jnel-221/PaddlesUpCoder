@@ -7,11 +7,11 @@ const newBlogHandler = async (event) => {
   console.log("you made it to newblogpost.js", blogTitle, blogContent);
   if (blogTitle && blogContent) {
     // Send a POST request to the API endpoint
-    // const response = await fetch("/api/posts/newpost", {
-    //   method: "POST",
-    //   body: JSON.stringify({ blogTitle, blogContent }),
-    //   headers: { "Content-Type": "application/json" },
-    // });
+    const response = await fetch("/api/posts/newpost", {
+      method: "POST",
+      body: JSON.stringify({ blogTitle, blogContent }),
+      headers: { "Content-Type": "application/json" },
+    });
 
     if (response.ok) {
       // If successful, redirect the browser to the dashboard

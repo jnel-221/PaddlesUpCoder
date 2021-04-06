@@ -33,13 +33,20 @@ router.post("/newpost", async (req, res) => {
   }
 });
 
-//update a blog-post
+//retrieve a single blog post
 router.post("/:id", async (req, res) => {
-  console.log("@@made it to update in blogRoutes", req.body)
+  console.log("@@made it to update in blogRoutes", req.body);
   try {
-    const post = await Post.findByPk(req.body.id)
-    console.log("@@made it to blogRoutes update route", post)
+    const postData = await Post.findByPk(req.body.id);
+    console.log("@@made it to blogRoutes update route", postData);
 
+    const post = postData.get({ plain: true });
+    console.log("@@made it to blogRoutes update route", post);
+    res.render("updatepost", {
+      post,
+      logged_in: req.session.logged_in,
+    });
+    
   } catch (err) {
     res.status(400).json(err);
   }
