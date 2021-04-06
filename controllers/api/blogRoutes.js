@@ -35,24 +35,39 @@ router.post("/newpost", async (req, res) => {
 
 //retrieve a single blog post
 router.post("/:id", async (req, res) => {
-  console.log("@@made it to update in blogRoutes", req.body);
   try {
     const postData = await Post.findByPk(req.body.id);
-    console.log("@@made it to blogRoutes update route", postData);
 
     const post = postData.get({ plain: true });
-    console.log("@@made it to blogRoutes update route", post);
+
     res.render("updatepost", {
       post,
       logged_in: req.session.logged_in,
     });
-
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-router.delete('/:id', withAuth, async (req, res) => {
+//update a blog post
+router.put("/:id", async (req, res) => {
+  
+  try {
+
+    const updateData = await Post.update({
+      title: req.body.title,
+      text: req.body.text,
+    },
+    {where: {id: req.body.id}});
+    
+    res.status(200).json(updateData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+//delete a blog post
+router.delete("/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.destroy({
       where: {
@@ -62,12 +77,12 @@ router.delete('/:id', withAuth, async (req, res) => {
     });
 
     if (!postData) {
-      res.status(404).json({ message: 'No post found with this id!' });
+      res.status(404).json({ message: "No post found with this id!" });
       return;
     }
 
     res.render("dashboard", {
-    logged_in: req.session.logged_in, 
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);

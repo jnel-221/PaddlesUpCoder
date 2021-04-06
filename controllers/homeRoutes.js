@@ -53,13 +53,12 @@ router.get("/newpost", withAuth, async (req, res) => {
 });
 
 router.get("/updatepost/:id", withAuth, async (req, res) => {
-  console.log("@in homeRoutes now", req.params.id);
+ 
   try {
     const postData = await Post.findByPk(req.params.id);
   
     const post = postData.get({ plain: true });
 
-    console.log("@@cleaned up data from single post", post);
     res.render("updatepost", {
       post,
       logged_in: req.session.logged_in,

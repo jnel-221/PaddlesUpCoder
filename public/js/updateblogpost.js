@@ -1,40 +1,35 @@
-// const grabIdHandler = async (event) => {
-//     // event.preventDefault;
-//     const id = await event.target.getAttribute('data-id');
+const updateButtonHandler = async (event) => {
+    if (event.target.hasAttribute('data-update')) {
+        const id = event.target.getAttribute('data-update');
+         
+        const title = document.querySelector("#title").value.trim();
 
-  
-//     console.log("made it to grabIdHandler", id)
-//     if (id) {
-//       console.log("you tried to get an id: ", id);
-//     const response = await fetch("/api/posts/:id", {
-//         method: "POST",
-//         body: JSON.stringify({id}),
-//         headers: { "Content-Type": "application/json" },
-//     });
+        const text = document.querySelector('#content').value.trim();
 
-//     // if(response.ok) {
-//     //     document.location.replace("/updatepost");
-//     // }else{
-//     //     alert(response.statusText);
-//     // }
+        console.log("updateblogpost.js update handler", id, title, text);
 
-// //     }
-// //   };
-  
-
-// //   const updateBlogHandler = async (event) => {
-// //     event.preventDefault();
-// //   };
-
-// // //   document.querySelectorAll(".card-header").forEach(function(element) 
-// //   {element.addEventListener("click", grabIdHandler)});
-
+        const response = await fetch(`/api/posts/${id}`, {
+          method: 'PUT',
+          body: JSON.stringify({id, title, text }),
+          headers: { "Content-Type": "application/json" },
+          });
+        
+    
+        if (response.ok) {
+          document.location.replace('/dashboard');
+        } else {
+          alert('Failed to update post');
+        }
+    
+    };
+};
+    
 //delete button handler
 const delButtonHandler = async (event) => {
     // event.preventDefault;
     if (event.target.hasAttribute('data-delete')) {
       const id = event.target.getAttribute('data-delete');
-        console.log("updateblogpost.js del handler", id);
+        
       const response = await fetch(`/api/posts/${id}`, {
         method: 'DELETE',
       });
@@ -46,6 +41,8 @@ const delButtonHandler = async (event) => {
       }
     }
   };
+
+  document.querySelector('#btn-update').addEventListener('click', updateButtonHandler);
 
   document
   .querySelector('#btn-delete')
