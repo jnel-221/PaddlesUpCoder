@@ -27,11 +27,11 @@ router.get("/dashboard", withAuth, async (req, res) => {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
 
-      include: [{ model: Post}],
+      include: [{ model: Post }],
     });
 
     const user = userData.get({ plain: true });
-   
+
     const posts = user.posts;
 
     res.render("dashboard", {
@@ -47,7 +47,9 @@ router.get("/dashboard", withAuth, async (req, res) => {
 //get newpost view
 router.get("/newpost", withAuth, async (req, res) => {
   if (req.session.logged_in) {
-    res.render("newpost");
+    res.render("newpost", {
+      logged_in: req.session.logged_in,
+    });
   } else {
     res.render("login");
   }
@@ -75,18 +77,21 @@ router.get("/viewonepost/:id", withAuth, async (req, res) => {
     const postData = await Post.findByPk(req.params.id, {
       include: [
         { model: User, attributes: { exclude: ["password"] } },
-        { model: Comment, include:[{model:User, attributes: {exclude: ['password'] }}] },
+        {
+          model: Comment,
+          include: [{ model: User, attributes: { exclude: ["password"] } }],
+        },
       ],
     });
 
     const post = postData.get({ plain: true });
-  
+
     const comments = post.comments;
-   
+
     res.render("viewonepost", {
       post,
       comments,
-      user_name:req.session.user_name,
+      user_name: req.session.user_name,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
