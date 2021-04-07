@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Comment } = require("../../models");
+const { Comment, Post, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 router.post("/", async (req, res) => {
@@ -11,10 +11,12 @@ router.post("/", async (req, res) => {
       user_id: req.session.user_id,
       post_id: req.body.post_id,
     });
-    console.log("server response to create comment ", response);
-    
+  
     res.status(200).json({ msg: "Comment posted", response });
-    
+   
+    res.render('viewonepost', {
+      logged_in: req.session.logged_in, 
+    })
   } catch (err) {
     res.status(500).json(err);
   }

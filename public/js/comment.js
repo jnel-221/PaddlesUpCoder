@@ -11,7 +11,7 @@ const commentButtonHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace("/viewonepost");
+      document.location.replace("/viewonepost/:id");
     } else {
       alert(response.statusText);
     }

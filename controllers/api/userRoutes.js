@@ -3,10 +3,10 @@ const { User, Post } = require("../../models");
 
 //create new user from sign-up view
 router.post("/signup", async (req, res) => {
-  console.log(req.body);
+  
   try {
     const userData = await User.create({user_name: req.body.user_name, password: req.body.password});
-    console.log(userData);
+
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
@@ -14,7 +14,7 @@ router.post("/signup", async (req, res) => {
       res.status(200).json(userData);
     });
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 

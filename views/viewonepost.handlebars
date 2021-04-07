@@ -10,9 +10,11 @@
 </div>
 
  {{!-- view comments --}}
+ {{#if comments}}
 {{#each comments}}
 {{>postedcomment}}
 {{/each}}
+{{/if}}
 
 {{!-- create new comment --}}
 <div class="card mx-auto mb-4">
