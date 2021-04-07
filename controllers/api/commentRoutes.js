@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
     console.log("server response to create comment ", response);
     
     res.status(200).json({ msg: "Comment posted", response });
+    
   } catch (err) {
     res.status(500).json(err);
   }
