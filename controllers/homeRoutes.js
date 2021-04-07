@@ -3,11 +3,11 @@ const path = require("path");
 const { User, Post } = require("../models");
 const withAuth = require("../utils/auth");
 
-//access homepage only prior to logging in / signing up
+//get homepage
 router.get("/", async (req, res) => {
   try {
     const userPostData = await Post.findAll({
-      include: [{ model: User }],
+      include: [{ model: User, attributes: {exclude: ["password"]} }],
     });
 
     const userPosts = userPostData.map((post) => post.get({ plain: true }));
@@ -22,6 +22,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//get user dashboard
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
@@ -33,10 +34,9 @@ router.get("/dashboard", withAuth, async (req, res) => {
     const user = userData.get({ plain: true });
 
     const posts = user.posts;
-    //grab only posts that logged-in user wrote to render on dashboard otherwise display empty page with button at bottom
+
     res.render("dashboard", {
       posts,
-      //passes in logged_in status
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -44,6 +44,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
+//get newpost view
 router.get("/newpost", withAuth, async (req, res) => {
   if (req.session.logged_in) {
     res.render("newpost");
@@ -52,11 +53,11 @@ router.get("/newpost", withAuth, async (req, res) => {
   }
 });
 
+//get a single post and render updatepost view
 router.get("/updatepost/:id", withAuth, async (req, res) => {
- 
   try {
     const postData = await Post.findByPk(req.params.id);
-  
+
     const post = postData.get({ plain: true });
 
     res.render("updatepost", {
@@ -68,8 +69,27 @@ router.get("/updatepost/:id", withAuth, async (req, res) => {
   }
 });
 
+//get a single post and render viewonepost view
+router.get("/viewonepost/:id", withAuth, async (req, res) => {
+  
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: { model: User, attributes: {exclude: ["password"]} },
+    });
+
+    const post = postData.get({ plain: true });
+   
+    res.render("viewonepost", {
+      post,
+      logged_in: req.session.logged_in,
+    })
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//get login view if not logged in
 router.get("/login", (req, res) => {
-  //if session exists, goes to dashboard, otherwise it renders homepage.
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
@@ -78,8 +98,8 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
+//get signup view if not logged-in
 router.get("/signup", (req, res) => {
-  //if session exists, goes to dashboard, otherwise it renders homepage.
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
