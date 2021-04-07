@@ -1,4 +1,4 @@
-//add login function here
+
 const newBlogHandler = async (event) => {
   event.preventDefault();
   

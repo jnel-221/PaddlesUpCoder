@@ -3,19 +3,21 @@ const commentButtonHandler = async (event) => {
     const post_id = event.target.getAttribute("data-comment");
 
     const text = document.querySelector("#comment").value.trim();
-
+    console.log("made it to comment.js in public file", post_id, text);
     const response = await fetch("/api/comments/", {
       method: "POST",
       body: JSON.stringify({ post_id, text }),
       headers: { "Content-Type": "application/json" },
     });
 
-    if(response.ok){
-        document.location.replace("/viewonepost")
-    } else{
-        alert(response.statusText);
+    if (response.ok) {
+      document.location.replace("/viewonepost");
+    } else {
+      alert(response.statusText);
     }
   }
 };
 
-document.querySelector("#btn-comment").addEventListener('click', commentButtonHandler)
+document
+  .querySelector("#btn-comment")
+  .addEventListener("click", commentButtonHandler);
