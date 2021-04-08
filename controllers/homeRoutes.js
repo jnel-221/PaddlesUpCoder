@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 
     res.render("homepage", {
       userPosts,
-      //passes in logged_in status
+    
       logged_in: req.session.logged_in,
     });
   } catch (err) {

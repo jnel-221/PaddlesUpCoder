@@ -22,7 +22,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
 
   try {
-    //find user where username matches a username in DB
+    //find user in db
     const userData = await User.findOne({
       where: { user_name: req.body.userName },
       include: {model: Post}
@@ -45,7 +45,7 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-    //saving user_id and logged_in as true to sessions!
+    //saving user_id and logged_in as true to sessions
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
@@ -58,10 +58,10 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//ends session
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
-    //session gets destroyed!
-    //to destroy a cookie, set the seconds to 0; by the way;
+    
     req.session.destroy(() => {
       res.status(204).end();
     });
