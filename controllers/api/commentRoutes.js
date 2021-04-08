@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Comment, Post, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-router.post("/", withAuth, async (req, res) => {
+router.post("/", async (req, res) => {
   console.log(req.body);
   try {
     
@@ -18,6 +18,7 @@ router.post("/", withAuth, async (req, res) => {
       logged_in: req.session.logged_in, 
     })
   } catch (err) {
+    console.log("error?", err)
     res.status(500).json(err);
   }
 });
