@@ -11,7 +11,8 @@ const commentButtonHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace(`/viewonepost/${post_id}`);
+      // document.location.replace(`/viewonepost/${post_id}`);
+      document.location.reload();
     } else {
       alert(response.statusText);
     }
