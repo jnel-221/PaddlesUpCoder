@@ -50,6 +50,8 @@ img{
       color: #f1faee;
       height: 50px;
   }
+
+  
    .author{
        float:right;
    }
@@ -81,7 +83,4 @@ img{
   
 
 
-  /* invisibility class */
-  .hidden {
-      display: none;
-  }
+ 
