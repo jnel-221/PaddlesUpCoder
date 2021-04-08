@@ -1,5 +1,17 @@
 
-
+{{#unless logged_in}}
+<div class="card mx-auto mb-4">
+    <a href="/login">
+        <div class="card-header" data-id={{id}}>
+            {{title}}
+            <p class="author">Posted by {{user.user_name}} on {{format_date date_created}}</p>
+        </div>
+    </a>
+    <div class="card-body">
+        <p>{{text}}</p>
+    </div>
+</div>
+{{else}}
 <div class="card mx-auto mb-4">
     <a href="/viewonepost/{{id}}">
         <div class="card-header" data-id={{id}}>
@@ -11,6 +23,10 @@
         <p>{{text}}</p>
     </div>
 </div>
+{{/unless}}
+
+
+
 
 
 

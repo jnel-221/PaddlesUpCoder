@@ -61,7 +61,6 @@ router.get("/updatepost/:id", withAuth, async (req, res) => {
     const postData = await Post.findByPk(req.params.id);
 
     const post = postData.get({ plain: true });
-
     res.render("updatepost", {
       post,
       logged_in: req.session.logged_in,
